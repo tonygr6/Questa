@@ -1,0 +1,2 @@
+# Questa
+Analizador para emprendedores
