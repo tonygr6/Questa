@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>QUESTA — ¿Vale la pena importarlo?</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,700;0,800;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,400&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #0e0e0e;
+  --bg2: #141414;
+  --surface: #1a1a1a;
+  --surface2: #222222;
+  --surface3: #2a2a2a;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --text: #f0ede8;
+  --muted: #888880;
+  --red: #cc2200;
+  --red-glow: rgba(204,34,0,0.2);
+  --gold: #FFD700;
+  --gold-dim: rgba(255,215,0,0.15);
+  --green: #22c47a;
+  --green-dim: rgba(34,196,122,0.1);
+  --warn: #f0a500;
+  --warn-dim: rgba(240,165,0,0.1);
+  --danger: #ff4444;
+  --danger-dim: rgba(255,68,68,0.1);
+  --ml: #ffe600;
+  --amazon: #ff9900;
+  --tiktok: #fe2c55;
+  --walmart: #0071ce;
+  --ali: #e8390e;
+  --sh-sm: 0 1px 4px rgba(0,0,0,0.4);
+  --sh: 0 4px 20px rgba(0,0,0,0.5);
+  --sh-lg: 0 8px 40px rgba(0,0,0,0.6);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Subtle grid */
+body::before {
+  content:'';
+  position:fixed;inset:0;
+  background-image:
+    radial-gradient(ellipse 60% 40% at 80% 10%, rgba(204,34,0,0.06) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 50% at 10% 90%, rgba(255,215,0,0.03) 0%, transparent 55%);
+  pointer-events:none;z-index:0;
+}
+
+.wrap {
+  position:relative;z-index:1;
+  max-width:940px;margin:0 auto;
+  padding:36px 20px 100px;
+}
+
+/* ══ LOGO COMPONENT ══ */
+.questa-logo {
+  display:inline-flex;
+  align-items:center;
+  gap:1px;
+  line-height:1;
+}
+.questa-q svg { display:block; }
+.questa-uesta {
+  font-family:'Syne',sans-serif;
+  font-weight:800;
+  color: var(--gold);
+  letter-spacing:-0.5px;
+  line-height:1;
+}
+
+/* ══ NAV ══ */
+.nav {
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:60px;
+  animation:fadeDown 0.5s ease both;
+}
+.nav-right {
+  display:flex;align-items:center;gap:10px;
+}
+.nav-pill {
+  display:flex;align-items:center;gap:6px;
+  background:var(--surface);
+  border:1px solid var(--border2);
+  border-radius:20px;
+  padding:6px 14px;
+  font-size:11px;font-weight:600;
+  color:var(--muted);
+}
+.nav-pill .live-dot {
+  width:6px;height:6px;border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 6px var(--green);
+  animation:pulse-dot 2s infinite;
+}
+@keyframes pulse-dot{0%,100%{opacity:1;}50%{opacity:0.4;}}
+
+.nav-beta {
+  background:var(--gold-dim);
+  border:1px solid rgba(255,215,0,0.2);
+  border-radius:20px;
+  padding:5px 12px;
+  font-size:11px;font-weight:700;
+  color:var(--gold);
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+/* ══ HERO ══ */
+.hero {
+  margin-bottom:52px;
+  animation:fadeUp 0.5s ease 0.1s both;
+}
+.hero-kicker {
+  display:flex;align-items:center;gap:8px;
+  margin-bottom:16px;
+  font-size:12px;font-weight:600;
+  letter-spacing:2px;text-transform:uppercase;
+  color:var(--red);
+}
+.hero-kicker::before {
+  content:'';
+  display:inline-block;width:20px;height:2px;
+  background:var(--red);border-radius:2px;
+}
+.hero h1 {
+  font-family:'Syne',sans-serif;
+  font-size:clamp(36px,6vw,64px);
+  font-weight:800;
+  line-height:1.06;
+  letter-spacing:-2px;
+  margin-bottom:20px;
+}
+.hero h1 .serif {
+  font-family:'Fraunces',serif;
+  font-style:italic;
+  font-weight:400;
+  color:var(--gold);
+}
+.hero h1 .red { color:var(--red); }
+.hero-desc {
+  font-size:16px;color:var(--muted);
+  max-width:560px;line-height:1.75;
+}
+.hero-desc strong{color:var(--text);font-weight:600;}
+
+.flow-row {
+  display:flex;align-items:center;gap:8px;
+  flex-wrap:wrap;margin-top:28px;
+}
+.fc {
+  display:flex;align-items:center;gap:6px;
+  padding:6px 13px;border-radius:7px;
+  font-size:12px;font-weight:700;border:1px solid;
+}
+.fc-ali{color:var(--ali);border-color:rgba(232,57,14,0.3);background:rgba(232,57,14,0.07);}
+.fc-ml{color:#111;border-color:rgba(255,230,0,0.5);background:var(--ml);}
+.fc-amz{color:var(--amazon);border-color:rgba(255,153,0,0.3);background:rgba(255,153,0,0.07);}
+.fc-ttk{color:var(--tiktok);border-color:rgba(254,44,85,0.3);background:rgba(254,44,85,0.07);}
+.fc-wmt{color:var(--walmart);border-color:rgba(0,113,206,0.3);background:rgba(0,113,206,0.07);}
+.fc-arrow{color:var(--muted);font-size:14px;}
+
+/* ══ SECTION HEADS ══ */
+.sec-head {
+  display:flex;align-items:center;gap:12px;
+  margin-bottom:12px;
+}
+.sec-num {
+  width:30px;height:30px;
+  background:var(--red);
+  color:white;border-radius:50%;
+  display:grid;place-items:center;
+  font-size:13px;font-weight:800;flex-shrink:0;
+  box-shadow:0 0 12px var(--red-glow);
+}
+.sec-title{font-size:15px;font-weight:700;}
+.sec-sub{font-size:12px;color:var(--muted);}
+
+/* ══ CARD ══ */
+.card {
+  background:var(--surface);
+  border:1px solid var(--border2);
+  border-radius:14px;
+  overflow:hidden;
+  margin-bottom:14px;
+  box-shadow:var(--sh-sm);
+}
+
+/* ══ IMPORT TABS ══ */
+.import-tabs{display:flex;border-bottom:1px solid var(--border);}
+.itab {
+  flex:1;padding:13px 16px;
+  font-size:13px;font-weight:600;
+  cursor:pointer;color:var(--muted);
+  border-bottom:2px solid transparent;margin-bottom:-1px;
+  transition:all 0.2s;
+  display:flex;align-items:center;justify-content:center;gap:7px;
+}
+.itab:hover{background:var(--surface2);color:var(--text);}
+.itab.active{color:var(--gold);border-bottom-color:var(--gold);background:rgba(255,215,0,0.03);}
+
+.tab-body{padding:20px;}
+.tab-pane{display:none;}
+.tab-pane.active{display:block;animation:fadeUp 0.3s ease both;}
+
+.input-row{display:flex;gap:10px;}
+.inp {
+  flex:1;
+  background:var(--surface2);
+  border:1px solid var(--border2);
+  border-radius:9px;padding:12px 14px;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:14px;color:var(--text);
+  outline:none;transition:border-color 0.2s;
+}
+.inp:focus{border-color:var(--gold);}
+.inp::placeholder{color:var(--muted);opacity:0.6;}
+textarea.inp{resize:none;height:148px;line-height:1.6;}
+
+.hint-txt{font-size:11px;color:var(--muted);margin-top:8px;line-height:1.5;}
+
+.btn-ex {
+  padding:12px 18px;
+  background:var(--red);color:white;
+  border:none;border-radius:9px;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:13px;font-weight:700;
+  cursor:pointer;white-space:nowrap;
+  transition:all 0.2s;flex-shrink:0;
+  box-shadow:0 0 16px var(--red-glow);
+}
+.btn-ex:hover{background:#e02800;transform:translateY(-1px);}
+.btn-ex:disabled{opacity:0.4;cursor:not-allowed;transform:none;box-shadow:none;}
+
+/* Extracted preview */
+.ext-box {
+  display:none;margin-top:14px;
+  background:var(--green-dim);
+  border:1px solid rgba(34,196,122,0.2);
+  border-radius:9px;padding:14px 16px;
+  animation:fadeUp 0.3s ease both;
+}
+.ext-box.show{display:block;}
+.ext-ok{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--green);margin-bottom:10px;}
+.ext-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.ext-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:3px;}
+.ext-val{font-size:13px;font-weight:600;}
+.ext-val.big{font-size:18px;color:var(--gold);}
+
+/* ══ FORM ══ */
+.form-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;padding:20px;}
+.field{display:flex;flex-direction:column;gap:5px;}
+.field label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);}
+.field input,.field select {
+  background:var(--surface2);
+  border:1px solid var(--border2);
+  border-radius:8px;padding:11px 13px;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:14px;color:var(--text);
+  outline:none;transition:border-color 0.2s;
+  width:100%;
+}
+.field input:focus,.field select:focus{border-color:var(--gold);}
+.field .fhint{font-size:11px;color:var(--muted);}
+.field select option{background:var(--surface2);}
+
+/* Currency row */
+.cur-row {
+  display:flex;align-items:center;gap:10px;
+  padding:9px 20px;
+  background:var(--surface2);
+  border-top:1px solid var(--border);
+  font-size:12px;color:var(--muted);
+}
+.cur-toggle{display:flex;background:var(--surface3);border-radius:6px;padding:2px;gap:2px;}
+.ctab{
+  padding:4px 10px;border-radius:4px;
+  font-size:11px;font-weight:700;
+  cursor:pointer;transition:all 0.2s;color:var(--muted);
+}
+.ctab.active{background:var(--surface);color:var(--text);box-shadow:var(--sh-sm);}
+
+/* Margin strip */
+.margin-strip {
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--border);
+  border-top:1px solid var(--border2);
+}
+.ms-cell{background:var(--surface);padding:14px 12px;text-align:center;}
+.ms-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:5px;}
+.ms-val{font-size:19px;font-weight:800;line-height:1;}
+.ms-val.pos{color:var(--green);}
+.ms-val.neg{color:var(--danger);}
+.ms-val.warn{color:var(--warn);}
+.ms-val.neu{color:var(--muted);}
+
+/* Platform selector */
+.plat-sel{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:20px;}
+.ps {
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  padding:14px 8px;
+  border:1px solid var(--border2);border-radius:12px;
+  cursor:pointer;transition:all 0.2s;
+  background:var(--surface2);
+  font-family:'Plus Jakarta Sans',sans-serif;
+}
+.ps:hover{border-color:var(--border2);background:var(--surface3);}
+.ps.sel{border-color:var(--gold);background:rgba(255,215,0,0.06);}
+.ps-icon{font-size:22px;}
+.ps-name{font-size:12px;font-weight:700;}
+.ps-note{font-size:10px;color:var(--muted);text-align:center;}
+.ps.sel .ps-name{color:var(--gold);}
+
+/* ══ GO BUTTON ══ */
+.go-btn {
+  width:100%;padding:18px;
+  background:var(--red);color:white;
+  border:none;border-radius:12px;
+  font-family:'Syne',sans-serif;
+  font-size:17px;font-weight:800;
+  cursor:pointer;transition:all 0.2s;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  letter-spacing:0.5px;
+  box-shadow:0 4px 24px var(--red-glow);
+  animation:fadeUp 0.5s ease 0.35s both;
+}
+.go-btn:hover{background:#e02800;transform:translateY(-2px);box-shadow:0 8px 32px var(--red-glow);}
+.go-btn:active{transform:translateY(0);}
+.go-btn:disabled{opacity:0.4;cursor:not-allowed;transform:none;box-shadow:none;}
+
+/* ══ ERROR ══ */
+.err{
+  display:none;
+  background:var(--danger-dim);
+  border:1px solid rgba(255,68,68,0.25);
+  border-radius:9px;padding:12px 16px;
+  font-size:13px;color:var(--danger);
+  margin-bottom:12px;
+}
+.err.show{display:block;animation:fadeUp 0.3s ease both;}
+
+/* ══ LOADING ══ */
+.load-wrap{display:none;}
+.load-wrap.show{display:block;animation:fadeUp 0.4s ease both;}
+.load-card {
+  background:var(--surface);
+  border:1px solid var(--border2);
+  border-radius:16px;
+  padding:52px 32px;text-align:center;
+  box-shadow:var(--sh);
+}
+
+/* Animated QUESTA logo in loader */
+.load-logo {
+  display:inline-flex;align-items:center;
+  margin-bottom:24px;
+  animation:spin-slow 4s linear infinite;
+}
+@keyframes spin-slow{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+.load-h{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;letter-spacing:-0.5px;margin-bottom:8px;}
+.load-p{font-size:14px;color:var(--muted);font-family:'Fraunces',serif;font-style:italic;}
+.load-steps {
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;
+  margin-top:28px;max-width:480px;margin-left:auto;margin-right:auto;
+}
+.ls {
+  display:flex;align-items:center;gap:8px;
+  padding:9px 13px;border-radius:8px;
+  background:var(--surface2);
+  font-size:12px;color:var(--muted);
+  transition:all 0.4s;text-align:left;
+}
+.ls.on{background:var(--red-glow);color:var(--gold);font-weight:600;border:1px solid rgba(204,34,0,0.3);}
+.ls.done{background:var(--green-dim);color:var(--green);}
+.ls-dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0;}
+
+/* ══ RESULTS ══ */
+.res-wrap{display:none;}
+.res-wrap.show{display:block;}
+
+/* Score banner */
+.score-banner {
+  background:var(--surface);
+  border:1px solid var(--border2);
+  border-radius:16px;padding:32px;
+  margin-bottom:14px;
+  display:flex;gap:28px;align-items:flex-start;
+  position:relative;overflow:hidden;
+  animation:fadeUp 0.5s ease both;
+  box-shadow:var(--sh);
+}
+.score-banner::before{
+  content:'';position:absolute;
+  top:-60px;right:-60px;
+  width:200px;height:200px;border-radius:50%;
+  background:radial-gradient(circle,var(--red-glow),transparent 70%);
+}
+.score-banner::after{
+  content:'';position:absolute;
+  bottom:-80px;left:30%;
+  width:160px;height:160px;border-radius:50%;
+  background:radial-gradient(circle,var(--gold-dim),transparent 70%);
+}
+.score-donut{position:relative;width:96px;height:96px;flex-shrink:0;z-index:1;}
+.score-donut svg{transform:rotate(-90deg);}
+.sd-bg{fill:none;stroke:var(--surface3);stroke-width:8;}
+.sd-fg{fill:none;stroke-width:8;stroke-linecap:round;stroke-dasharray:264;transition:stroke-dashoffset 1.3s ease 0.3s;}
+.sd-label{position:absolute;inset:0;display:grid;place-items:center;text-align:center;}
+.sd-num{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;line-height:1;}
+.sd-sub{font-size:10px;color:var(--muted);display:block;margin-top:1px;}
+.banner-body-wrap{flex:1;z-index:1;}
+.banner-pill{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:10px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;
+  padding:3px 10px;border-radius:20px;margin-bottom:10px;
+}
+.bp-high{background:rgba(34,196,122,0.15);color:var(--green);}
+.bp-mid{background:var(--warn-dim);color:var(--warn);}
+.bp-low{background:var(--danger-dim);color:var(--danger);}
+.banner-title{font-family:'Syne',sans-serif;font-size:clamp(20px,3vw,28px);font-weight:800;letter-spacing:-0.5px;line-height:1.2;margin-bottom:10px;}
+.banner-desc{font-size:14px;color:var(--muted);line-height:1.7;font-family:'Fraunces',serif;font-style:italic;}
+
+/* Platform cards */
+.plat-grid-res{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px;}
+.pc{
+  background:var(--surface);border:1px solid var(--border2);
+  border-radius:13px;padding:18px;position:relative;overflow:hidden;
+  transition:transform 0.2s,border-color 0.2s;
+  animation:fadeUp 0.5s ease both;
+  box-shadow:var(--sh-sm);
+}
+.pc:hover{transform:translateY(-2px);}
+.pc.winner{border-color:var(--gold);box-shadow:0 0 20px var(--gold-dim);}
+.pc-crown{
+  position:absolute;top:10px;right:10px;
+  font-size:11px;font-weight:700;
+  color:var(--gold);
+  background:var(--gold-dim);
+  padding:2px 7px;border-radius:4px;
+  letter-spacing:0.5px;
+}
+.pc-head{display:flex;align-items:center;gap:7px;margin-bottom:13px;}
+.pc-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.pc-name{font-size:12px;font-weight:700;}
+.pc-metrics{display:flex;flex-direction:column;gap:6px;}
+.pm{display:flex;justify-content:space-between;align-items:center;font-size:11px;}
+.pm-l{color:var(--muted);}
+.pm-v{font-weight:700;font-size:12px;}
+.pm-v.g{color:var(--green);}
+.pm-v.r{color:var(--danger);}
+.pc-bar{margin-top:10px;}
+.pcb-top{display:flex;justify-content:space-between;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--muted);margin-bottom:4px;}
+.pcb-track{height:4px;background:var(--surface3);border-radius:2px;overflow:hidden;}
+.pcb-fill{height:100%;border-radius:2px;transition:width 1s ease 0.5s;}
+.pc-rec{font-size:11px;color:var(--muted);margin-top:10px;padding-top:10px;border-top:1px solid var(--border);line-height:1.5;}
+
+/* Investment */
+.invest-box{
+  background:linear-gradient(135deg,rgba(204,34,0,0.08),rgba(255,215,0,0.04));
+  border:1px solid rgba(204,34,0,0.2);
+  border-radius:14px;padding:20px;margin-bottom:14px;
+  animation:fadeUp 0.5s ease 0.1s both;
+}
+.invest-title{font-size:13px;font-weight:700;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:6px;}
+.invest-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.inv-item{text-align:center;background:var(--surface2);border-radius:9px;padding:12px 8px;}
+.inv-lbl{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:5px;}
+.inv-val{font-size:17px;font-weight:800;}
+
+/* Competitor table */
+.comp-card{
+  background:var(--surface);border:1px solid var(--border2);
+  border-radius:14px;overflow:hidden;margin-bottom:14px;
+  box-shadow:var(--sh-sm);animation:fadeUp 0.5s ease 0.1s both;
+}
+.comp-head{
+  padding:16px 20px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.comp-head-title{font-size:14px;font-weight:700;display:flex;align-items:center;gap:7px;}
+.comp-head-sub{font-size:12px;color:var(--muted);font-family:'Fraunces',serif;font-style:italic;}
+table{width:100%;border-collapse:collapse;}
+thead th{
+  padding:9px 16px;text-align:left;
+  font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;
+  color:var(--muted);background:var(--surface2);
+  border-bottom:1px solid var(--border);
+}
+tbody td{padding:12px 16px;font-size:12px;border-bottom:1px solid var(--border);vertical-align:middle;}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr:hover td{background:var(--surface2);}
+.cn{font-weight:600;font-size:13px;}
+.cn small{display:block;font-size:11px;color:var(--muted);font-weight:400;margin-top:1px;}
+.stars{color:var(--warn);}
+.vs-chip{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:700;padding:3px 8px;border-radius:5px;}
+.vs-b{background:var(--green-dim);color:var(--green);}
+.vs-s{background:var(--warn-dim);color:var(--warn);}
+.vs-h{background:var(--danger-dim);color:var(--danger);}
+.tu-row td{background:rgba(255,215,0,0.03) !important;}
+.tu-badge{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:700;color:var(--gold);background:var(--gold-dim);padding:2px 6px;border-radius:4px;margin-left:5px;}
+
+/* Analysis */
+.analysis-card{background:var(--surface);border:1px solid var(--border2);border-radius:14px;padding:24px;margin-bottom:14px;animation:fadeUp 0.5s ease 0.2s both;}
+.analysis-card h4{font-size:14px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:7px;}
+.analysis-text{font-family:'Fraunces',serif;font-size:14px;line-height:1.9;color:var(--muted);}
+.analysis-text p{margin-bottom:13px;}
+.analysis-text p:last-child{margin-bottom:0;}
+.analysis-text strong{color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;}
+
+/* Two col */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+.panel{background:var(--surface);border:1px solid var(--border2);border-radius:14px;padding:22px;animation:fadeUp 0.5s ease 0.25s both;}
+.panel h4{font-size:13px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:7px;}
+.step-list{display:flex;flex-direction:column;gap:9px;}
+.step-item{display:flex;gap:9px;align-items:flex-start;}
+.step-n{width:22px;height:22px;flex-shrink:0;background:var(--red);color:white;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:800;}
+.step-t{font-size:12px;line-height:1.55;color:var(--muted);}
+.step-t strong{color:var(--text);}
+.risk-list{display:flex;flex-direction:column;gap:8px;}
+.risk-item{display:flex;gap:8px;padding:10px 12px;background:var(--danger-dim);border-left:3px solid var(--danger);border-radius:0 8px 8px 0;font-size:12px;line-height:1.5;color:var(--muted);}
+
+/* MX tip */
+.mx-tip{
+  background:linear-gradient(135deg,rgba(0,113,206,0.07),rgba(255,215,0,0.04));
+  border:1px solid var(--border2);border-radius:14px;padding:18px 22px;
+  margin-bottom:14px;display:flex;gap:14px;align-items:flex-start;
+  animation:fadeUp 0.5s ease 0.3s both;
+}
+.mx-flag{font-size:26px;flex-shrink:0;}
+.mx-tip-title{font-size:13px;font-weight:700;margin-bottom:5px;color:var(--gold);}
+.mx-tip-body{font-size:13px;color:var(--muted);line-height:1.6;}
+
+/* Reset */
+.reset-area{text-align:center;padding-top:8px;animation:fadeUp 0.5s ease 0.35s both;}
+.reset-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:12px 24px;background:transparent;
+  border:1px solid var(--border2);border-radius:10px;
+  color:var(--muted);
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;
+  cursor:pointer;transition:all 0.2s;
+}
+.reset-btn:hover{color:var(--text);border-color:var(--border2);}
+
+/* Footer */
+.footer {
+  margin-top:60px;padding-top:24px;
+  border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;
+}
+.footer-copy{font-size:11px;color:var(--muted);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-10px);}to{opacity:1;transform:translateY(0);}}
+
+@media(max-width:700px){
+  .form-grid{grid-template-columns:1fr 1fr;}
+  .plat-grid-res,.invest-grid,.margin-strip{grid-template-columns:1fr 1fr;}
+  .two-col{grid-template-columns:1fr;}
+  .hero h1{font-size:34px;}
+  .plat-sel{grid-template-columns:1fr 1fr;}
+  .load-steps{grid-template-columns:1fr;}
+  .score-banner{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ══ NAV ══ -->
+<nav class="nav">
+  <!-- QUESTA LOGO DARK -->
+  <div class="questa-logo">
+    <span class="questa-q">
+      <svg width="38" height="46" viewBox="0 0 38 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="16" cy="16" r="11.5" stroke="#cc2200" stroke-width="5.5" fill="none"/>
+        <line x1="24" y1="24" x2="35" y2="39" stroke="#cc2200" stroke-width="5.5" stroke-linecap="round"/>
+      </svg>
+    </span>
+    <span class="questa-uesta" style="font-size:26px;">UESTA</span>
+  </div>
+  <div class="nav-right">
+    <div class="nav-pill"><div class="live-dot"></div>IA activa</div>
+    <div class="nav-beta">Beta MX</div>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<div class="hero" id="heroSection">
+  <div class="hero-kicker">La herramienta que faltaba en México</div>
+  <h1>¿Vale la pena<br/>importarlo <span class="serif">de China</span><br/>y venderlo <span class="red">aquí?</span></h1>
+  <p class="hero-desc">
+    Pega el link o texto de cualquier producto en AliExpress y en segundos te decimos <strong>si es rentable</strong>, en qué plataforma venderlo primero y cuánto necesitas para empezar — todo en pesos mexicanos.
+  </p>
+  <div class="flow-row">
+    <div class="fc fc-ali">🛒 AliExpress</div>
+    <div class="fc-arrow">→</div>
+    <div class="fc fc-ml">🛍 Mercado Libre</div>
+    <div class="fc fc-amz">📦 Amazon MX</div>
+    <div class="fc fc-ttk">🎵 TikTok Shop</div>
+    <div class="fc fc-wmt">🏪 Walmart MX</div>
+  </div>
+</div>
+
+<!-- ══ FORM ══ -->
+<div id="formSection">
+
+  <!-- STEP 1 -->
+  <div class="sec-head" style="animation:fadeUp 0.5s ease 0.2s both">
+    <div class="sec-num">1</div>
+    <div>
+      <div class="sec-title">Importa tu producto de AliExpress</div>
+      <div class="sec-sub">Pega el link directo o copia y pega la descripción del producto</div>
+    </div>
+  </div>
+
+  <div class="card" style="animation:fadeUp 0.5s ease 0.25s both">
+    <div class="import-tabs">
+      <div class="itab active" onclick="switchTab('url')">🔗 Pegar link de AliExpress</div>
+      <div class="itab" onclick="switchTab('txt')">📋 Pegar texto / descripción</div>
+    </div>
+    <div class="tab-body">
+      <div class="tab-pane active" id="pane-url">
+        <div class="input-row">
+          <input class="inp" id="aliUrl" type="url" placeholder="https://www.aliexpress.com/item/..."/>
+          <button class="btn-ex" onclick="doUrl()" id="btnUrl">⚡ Extraer</button>
+        </div>
+        <div class="hint-txt">💡 Copia el URL desde la barra del navegador en AliExpress y pégalo aquí</div>
+      </div>
+      <div class="tab-pane" id="pane-txt">
+        <textarea class="inp" id="aliText" placeholder="Pega aquí título, precio, descripción o cualquier texto del producto…
+
+Ejemplo:
+LED Desk Lamp USB Rechargeable 3 Color Modes Touch Control
+Price: US $6.89 / piece  |  Min. Order: 2 pieces
+4.8 ⭐ (3,241 reviews) | 8,500+ sold
+Material: ABS, Power: 5W..."></textarea>
+        <button class="btn-ex" style="margin-top:10px;width:100%" onclick="doText()">⚡ Analizar texto</button>
+        <div class="hint-txt">💡 Entre más texto pegues (título, precio, specs, reviews), más preciso será el análisis</div>
+      </div>
+      <div class="ext-box" id="extBox">
+        <div class="ext-ok">✅ Producto detectado</div>
+        <div class="ext-grid">
+          <div style="grid-column:1/-1">
+            <div class="ext-lbl">Nombre del producto</div>
+            <div class="ext-val" id="extName">—</div>
+          </div>
+          <div>
+            <div class="ext-lbl">Categoría</div>
+            <div class="ext-val" id="extCat">—</div>
+          </div>
+          <div>
+            <div class="ext-lbl">Precio AliExpress</div>
+            <div class="ext-val big" id="extPrice">—</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="sec-head" style="margin-top:20px;animation:fadeUp 0.5s ease 0.3s both">
+    <div class="sec-num">2</div>
+    <div>
+      <div class="sec-title">Define tus números</div>
+      <div class="sec-sub">Puedes capturar en pesos mexicanos o dólares</div>
+    </div>
+  </div>
+
+  <div class="card" style="animation:fadeUp 0.5s ease 0.32s both">
+    <div class="cur-row">
+      Moneda:
+      <div class="cur-toggle">
+        <div class="ctab active" onclick="setCur('mxn')" id="ctab-mxn">🇲🇽 MXN</div>
+        <div class="ctab" onclick="setCur('usd')" id="ctab-usd">🇺🇸 USD</div>
+      </div>
+      <span id="curNote" style="font-size:11px">Tipo de cambio: 1 USD ≈ $17.50 MXN</span>
+    </div>
+    <div class="form-grid">
+      <div class="field">
+        <label>Costo del producto *</label>
+        <input type="number" id="costPrice" placeholder="Ej: 148" min="0" step="0.01" oninput="calcM()"/>
+        <span class="fhint" id="costHint">Lo que pagas en AliExpress (MXN)</span>
+      </div>
+      <div class="field">
+        <label>Precio de venta *</label>
+        <input type="number" id="sellPrice" placeholder="Ej: 499" min="0" step="0.01" oninput="calcM()"/>
+        <span class="fhint" id="sellHint">¿A cuánto lo venderías?</span>
+      </div>
+      <div class="field">
+        <label>Envío por unidad</label>
+        <input type="number" id="shipCost" placeholder="Ej: 60" min="0" step="0.01" oninput="calcM()"/>
+        <span class="fhint">Costo de envío al comprador</span>
+      </div>
+      <div class="field">
+        <label>Nombre del producto *</label>
+        <input type="text" id="prodName" placeholder="Ej: Lámpara LED escritorio USB"/>
+      </div>
+      <div class="field">
+        <label>Categoría</label>
+        <select id="prodCat">
+          <option value="">Selecciona…</option>
+          <option>Iluminación LED</option>
+          <option>Electrónica y Gadgets</option>
+          <option>Hogar y Cocina</option>
+          <option>Salud y Belleza</option>
+          <option>Deportes y Fitness</option>
+          <option>Ropa y Accesorios</option>
+          <option>Juguetes y Bebé</option>
+          <option>Mascotas</option>
+          <option>Herramientas</option>
+          <option>Automotriz</option>
+          <option>Otro</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Unidades iniciales</label>
+        <input type="number" id="units" placeholder="Ej: 50" min="1" value="50" oninput="calcM()"/>
+        <span class="fhint">¿Cuántas unidades para empezar?</span>
+      </div>
+    </div>
+    <div class="margin-strip">
+      <div class="ms-cell"><div class="ms-lbl">Ganancia bruta</div><div class="ms-val neu" id="ms-gross">—</div></div>
+      <div class="ms-cell"><div class="ms-lbl">Margen %</div><div class="ms-val neu" id="ms-pct">—</div></div>
+      <div class="ms-cell"><div class="ms-lbl">Inversión inicial</div><div class="ms-val neu" id="ms-invest">—</div></div>
+      <div class="ms-cell"><div class="ms-lbl">Ganancia x lote</div><div class="ms-val neu" id="ms-total">—</div></div>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="sec-head" style="margin-top:20px;animation:fadeUp 0.5s ease 0.38s both">
+    <div class="sec-num">3</div>
+    <div>
+      <div class="sec-title">¿Dónde quieres venderlo?</div>
+      <div class="sec-sub">Selecciona las plataformas a analizar</div>
+    </div>
+  </div>
+
+  <div class="card" style="animation:fadeUp 0.5s ease 0.4s both">
+    <div class="plat-sel" id="platSel">
+      <button class="ps sel" data-p="Mercado Libre México" onclick="toggleP(this)">
+        <span class="ps-icon">🛍️</span>
+        <span class="ps-name">Mercado Libre</span>
+        <span class="ps-note">#1 en México</span>
+      </button>
+      <button class="ps sel" data-p="Amazon México" onclick="toggleP(this)">
+        <span class="ps-icon">📦</span>
+        <span class="ps-name">Amazon MX</span>
+        <span class="ps-note">amazon.com.mx</span>
+      </button>
+      <button class="ps sel" data-p="TikTok Shop México" onclick="toggleP(this)">
+        <span class="ps-icon">🎵</span>
+        <span class="ps-name">TikTok Shop</span>
+        <span class="ps-note">↑ Poca competencia ahora</span>
+      </button>
+      <button class="ps sel" data-p="Walmart México" onclick="toggleP(this)">
+        <span class="ps-icon">🏪</span>
+        <span class="ps-name">Walmart MX</span>
+        <span class="ps-note">walmart.com.mx</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="err" id="errBar">⚠️ Completa los campos obligatorios: nombre del producto, costo y precio de venta.</div>
+
+  <button class="go-btn" id="goBtn" onclick="runAnalysis()">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <circle cx="8" cy="8" r="5.5" stroke="white" stroke-width="2.2" fill="none"/>
+      <line x1="12" y1="12" x2="18" y2="18" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+    </svg>
+    Analizar con QUESTA
+  </button>
+</div>
+
+<!-- ══ LOADING ══ -->
+<div class="load-wrap" id="loadWrap">
+  <div class="load-card">
+    <!-- Spinning Q -->
+    <div class="load-logo">
+      <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+        <circle cx="18" cy="18" r="12" stroke="#cc2200" stroke-width="5.5" fill="none"/>
+        <line x1="27" y1="27" x2="40" y2="40" stroke="#cc2200" stroke-width="5.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="load-h">QUESTA está analizando…</div>
+    <div class="load-p">Calculando márgenes, competencia y oportunidades en México</div>
+    <div class="load-steps">
+      <div class="ls" id="ls1"><div class="ls-dot"></div>Procesando datos del producto</div>
+      <div class="ls" id="ls2"><div class="ls-dot"></div>Calculando márgenes en MXN</div>
+      <div class="ls" id="ls3"><div class="ls-dot"></div>Buscando competidores locales</div>
+      <div class="ls" id="ls4"><div class="ls-dot"></div>Evaluando Mercado Libre MX</div>
+      <div class="ls" id="ls5"><div class="ls-dot"></div>Analizando Amazon y TikTok</div>
+      <div class="ls" id="ls6"><div class="ls-dot"></div>Generando reporte completo</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ RESULTS ══ -->
+<div class="res-wrap" id="resWrap"></div>
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer">
+  <div class="questa-logo">
+    <span class="questa-q">
+      <svg width="22" height="26" viewBox="0 0 38 46" fill="none">
+        <circle cx="16" cy="16" r="11.5" stroke="#cc2200" stroke-width="5.5" fill="none"/>
+        <line x1="24" y1="24" x2="35" y2="39" stroke="#cc2200" stroke-width="5.5" stroke-linecap="round"/>
+      </svg>
+    </span>
+    <span class="questa-uesta" style="font-size:15px;">UESTA</span>
+  </div>
+  <div class="footer-copy">Beta · Para el emprendedor mexicano · 2025</div>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+// ── STATE ──
+let currency = 'mxn';
+let selPlats = ['Mercado Libre México','Amazon México','TikTok Shop México','Walmart México'];
+let extDesc = '';
+const TC = 17.5;
+
+// ── CURRENCY ──
+function setCur(c) {
+  currency = c;
+  ['mxn','usd'].forEach(x => document.getElementById('ctab-'+x).classList.toggle('active', x===c));
+  const s = c==='mxn' ? 'MXN' : 'USD';
+  document.getElementById('costHint').textContent = `Lo que pagas en AliExpress (${s})`;
+  document.getElementById('sellHint').textContent = `¿A cuánto lo venderías? (${s})`;
+  calcM();
+}
+
+// ── TABS ──
+function switchTab(t) {
+  ['url','txt'].forEach(x => {
+    document.getElementById('pane-'+x).classList.toggle('active', x===t);
+  });
+  document.querySelectorAll('.itab').forEach((el,i) =>
+    el.classList.toggle('active', (i===0&&t==='url')||(i===1&&t==='txt'))
+  );
+}
+
+// ── PLATFORMS ──
+function toggleP(btn) {
+  const p = btn.dataset.p;
+  if(btn.classList.contains('sel')) {
+    if(selPlats.length > 1) { btn.classList.remove('sel'); selPlats = selPlats.filter(x=>x!==p); }
+  } else { btn.classList.add('sel'); selPlats.push(p); }
+}
+
+// ── MARGINS ──
+function calcM() {
+  const cost = parseFloat(document.getElementById('costPrice').value)||0;
+  const sell = parseFloat(document.getElementById('sellPrice').value)||0;
+  const ship = parseFloat(document.getElementById('shipCost').value)||0;
+  const units = parseInt(document.getElementById('units').value)||50;
+  if(!cost||!sell) return;
+  const sym = currency==='mxn' ? '$' : 'USD $';
+  const gross = sell - cost - ship;
+  const pct = ((gross/sell)*100).toFixed(1);
+  const invest = (cost*units).toFixed(0);
+  const total = (gross*units).toFixed(0);
+  const g = document.getElementById('ms-gross');
+  g.textContent = `${sym}${gross.toFixed(0)}`; g.className = `ms-val ${gross>10?'pos':gross>0?'warn':'neg'}`;
+  const p = document.getElementById('ms-pct');
+  p.textContent = `${pct}%`; p.className = `ms-val ${parseFloat(pct)>35?'pos':parseFloat(pct)>15?'warn':'neg'}`;
+  document.getElementById('ms-invest').textContent = `${sym}${parseInt(invest).toLocaleString()}`;
+  const t = document.getElementById('ms-total');
+  t.textContent = `${sym}${parseInt(total).toLocaleString()}`; t.className = `ms-val ${parseInt(total)>0?'pos':'neg'}`;
+}
+
+// ── EXTRACT ──
+async function callAI(prompt) {
+  const r = await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})});
+  const d = await r.json();
+  return d.content.map(b=>b.text||'').join('').replace(/```json|```/g,'').trim();
+}
+
+async function doUrl() {
+  const url = document.getElementById('aliUrl').value.trim();
+  if(!url){alert('Pega un link de AliExpress');return;}
+  const btn = document.getElementById('btnUrl');
+  btn.disabled=true;btn.textContent='⏳ Extrayendo…';
+  await extractProd(`Link de AliExpress: ${url}`);
+  btn.disabled=false;btn.textContent='⚡ Extraer';
+}
+
+async function doText() {
+  const txt = document.getElementById('aliText').value.trim();
+  if(!txt||txt.length<15){alert('Pega más texto del producto');return;}
+  const btn = document.querySelector('#pane-txt .btn-ex');
+  btn.disabled=true;btn.textContent='⏳ Analizando…';
+  await extractProd(`Texto copiado de AliExpress:\n${txt}`);
+  btn.disabled=false;btn.textContent='⚡ Analizar texto';
+}
+
+async function extractProd(input) {
+  const prompt = `Extrae información del siguiente producto de AliExpress. Responde SOLO JSON sin backticks:
+${input}
+{"name":"nombre en español máx 65 chars","category":"categoría","price_usd":número,"price_mxn":número precio MXN (usd*17.5),"description":"descripción breve 2 oraciones en español"}`;
+  try {
+    const raw = await callAI(prompt);
+    const p = JSON.parse(raw);
+    document.getElementById('extName').textContent = p.name||'—';
+    document.getElementById('extCat').textContent = p.category||'—';
+    document.getElementById('extPrice').textContent = currency==='mxn' ? `$${p.price_mxn||'—'} MXN` : `USD $${p.price_usd||'—'}`;
+    document.getElementById('extBox').classList.add('show');
+    if(p.name) document.getElementById('prodName').value = p.name;
+    const costVal = currency==='mxn' ? p.price_mxn : p.price_usd;
+    if(costVal) { document.getElementById('costPrice').value = costVal; calcM(); }
+    if(p.category) {
+      const sel = document.getElementById('prodCat');
+      for(let o of sel.options) if(o.text.toLowerCase().includes(p.category.toLowerCase().split(' ')[0])) {sel.value=o.value;break;}
+    }
+    extDesc = p.description||'';
+  } catch(e) { alert('No se pudo extraer. Prueba pegando el texto manualmente.'); }
+}
+
+// ── ANALYSIS ──
+async function runAnalysis() {
+  const name = document.getElementById('prodName').value.trim();
+  const cost = parseFloat(document.getElementById('costPrice').value);
+  const sell = parseFloat(document.getElementById('sellPrice').value);
+  const ship = parseFloat(document.getElementById('shipCost').value)||0;
+  const units = parseInt(document.getElementById('units').value)||50;
+  const cat = document.getElementById('prodCat').value;
+  document.getElementById('errBar').classList.remove('show');
+  if(!name||!cost||!sell){document.getElementById('errBar').classList.add('show');return;}
+
+  const sym = currency==='mxn'?'MXN':'USD';
+  const toUSD = v => currency==='mxn' ? v/TC : v;
+  const costUSD = toUSD(cost), sellUSD = toUSD(sell), shipUSD = toUSD(ship);
+  const gross = sell-cost-ship, grossUSD = toUSD(gross);
+  const mPct = ((gross/sell)*100).toFixed(1);
+  const invest = (cost*units).toFixed(0), investUSD = toUSD(cost*units).toFixed(2);
+
+  const fees = {'Mercado Libre México':0.135,'Amazon México':0.15,'TikTok Shop México':0.05,'Walmart México':0.12};
+  const pCalc = selPlats.map(p => {
+    const f = fees[p]||0.15;
+    const fAmt = sellUSD*f, net = grossUSD-fAmt, netMXN = gross-sell*f;
+    return {p, fee:(f*100).toFixed(0), fAmtUSD:fAmt.toFixed(2), netUSD:net.toFixed(2), netMXN:netMXN.toFixed(0), netPct:((net/sellUSD)*100).toFixed(1)};
+  });
+
+  document.getElementById('formSection').style.display='none';
+  document.getElementById('heroSection').style.display='none';
+  document.getElementById('loadWrap').classList.add('show');
+
+  const lids=['ls1','ls2','ls3','ls4','ls5','ls6'];
+  lids.forEach((id,i)=>setTimeout(()=>{
+    if(i>0){const pr=document.getElementById(lids[i-1]);pr.classList.remove('on');pr.classList.add('done');}
+    document.getElementById(id).classList.add('on');
+  },i*1500));
+
+  const prompt = `Eres experto en e-commerce para México. Analiza este producto para importar de AliExpress/China y vender en México.
+
+PRODUCTO: ${name}
+CATEGORÍA: ${cat||'No especificada'}
+DESCRIPCIÓN: ${extDesc||'No especificada'}
+COSTO ALIEXPRESS: $${costUSD.toFixed(2)} USD ($${cost} ${sym})
+PRECIO VENTA: $${sellUSD.toFixed(2)} USD ($${sell} ${sym})
+ENVÍO: $${shipUSD.toFixed(2)} USD
+MARGEN BRUTO: $${grossUSD.toFixed(2)} USD (${mPct}%)
+UNIDADES: ${units} — Inversión: $${investUSD} USD ($${invest} ${sym})
+PLATAFORMAS: ${selPlats.join(', ')}
+
+POR PLATAFORMA:
+${pCalc.map(c=>`- ${c.p}: comisión ${c.fee}% ($${c.fAmtUSD} USD), neta $${c.netUSD} USD ($${c.netMXN} MXN)`).join('\n')}
+
+Contexto: Emprendedor mexicano que quiere importar de China para vender en México. Considera aranceles MX, tiempos envío China (15-45 días), precios competitivos en MXN, TikTok Shop MX con poca competencia, Mercado Libre como plataforma dominante.
+
+Responde SOLO JSON sin backticks:
+{"overall_score":número 0-100,"profitability_level":"Alta|Media|Baja","verdict_title":"máx 10 palabras impactante","verdict_body":"2-3 oraciones veredicto mencionando México","best_platform":"nombre exacto mejor plataforma","break_even_units":número,"platforms":[{"name":"nombre exacto","score":número,"difficulty":"Baja|Media|Alta","opportunity":"Baja|Media|Alta|Muy Alta","recommendation":"1-2 oraciones específicas para MX","is_winner":true_o_false}],"competitors":[{"name":"producto similar en ML o Amazon MX","platform":"Mercado Libre México o Amazon México","price_mxn":número,"rating":número,"monthly_sales":"rango estimado","vs_price":"Más caro|Similar|Más barato","insight":"qué aprender en 1 oración"}],"analysis":"4 párrafos: rentabilidad real con costos de importación, mercado mexicano, ventana de oportunidad, factores de éxito. Saltos de línea entre párrafos.","action_steps":["paso 1 concreto MX","paso 2","paso 3","paso 4","paso 5"],"risks":["riesgo 1 importar a MX","riesgo 2","riesgo 3"],"mx_tip":"tip exclusivo mercado mexicano que muchos ignoran"}`;
+
+  try {
+    const raw = await callAI(prompt);
+    const r = JSON.parse(raw);
+    setTimeout(()=>{
+      document.getElementById('ls6').classList.replace('on','done');
+      setTimeout(()=>{
+        document.getElementById('loadWrap').classList.remove('show');
+        render(r,{name,cost,sell,ship,units,gross,mPct,invest,investUSD,sym,pCalc,sellUSD,grossUSD,costUSD});
+      },500);
+    },9000);
+  } catch(e) {
+    console.error(e);
+    document.getElementById('loadWrap').classList.remove('show');
+    document.getElementById('formSection').style.display='block';
+    document.getElementById('heroSection').style.display='block';
+    document.getElementById('errBar').textContent='⚠️ Error de conexión. Intenta de nuevo.';
+    document.getElementById('errBar').classList.add('show');
+  }
+}
+
+// ── RENDER ──
+function render(r, m) {
+  const pC={'Mercado Libre México':'#ffe600','Amazon México':'#ff9900','TikTok Shop México':'#fe2c55','Walmart México':'#0071ce'};
+  const pI={'Mercado Libre México':'🛍️','Amazon México':'📦','TikTok Shop México':'🎵','Walmart México':'🏪'};
+  const scoreOff = 264-(264*r.overall_score/100);
+  const sCol = r.overall_score>=70?'#22c47a':r.overall_score>=45?'#f0a500':'#ff4444';
+  const pClass = r.profitability_level==='Alta'?'bp-high':r.profitability_level==='Media'?'bp-mid':'bp-low';
+  const pEmoji = r.profitability_level==='Alta'?'🟢':r.profitability_level==='Media'?'🟡':'🔴';
+
+  const platCards = r.platforms.map(p=>{
+    const c = m.pCalc.find(x=>x.p===p.name)||{};
+    const col = pC[p.name]||'#888';
+    const pos = parseFloat(c.netMXN||0)>0;
+    return `<div class="pc ${p.is_winner?'winner':''}">
+      ${p.is_winner?'<div class="pc-crown">👑 MEJOR</div>':''}
+      <div class="pc-head"><div class="pc-dot" style="background:${col}"></div><div class="pc-name">${pI[p.name]||'🛒'} ${p.name.replace(' México','')}</div></div>
+      <div class="pc-metrics">
+        <div class="pm"><span class="pm-l">Ganancia neta</span><span class="pm-v ${pos?'g':'r'}">$${parseInt(c.netMXN||0).toLocaleString()} MXN</span></div>
+        <div class="pm"><span class="pm-l">Comisión</span><span class="pm-v">${c.fee||'—'}%</span></div>
+        <div class="pm"><span class="pm-l">Dificultad</span><span class="pm-v">${p.difficulty}</span></div>
+        <div class="pm"><span class="pm-l">Oportunidad</span><span class="pm-v g">${p.opportunity}</span></div>
+      </div>
+      <div class="pc-bar">
+        <div class="pcb-top"><span>Score</span><span>${p.score}/100</span></div>
+        <div class="pcb-track"><div class="pcb-fill" style="width:${p.score}%;background:${col}"></div></div>
+      </div>
+      <div class="pc-rec">${p.recommendation}</div>
+    </div>`;
+  }).join('');
+
+  const vsC = v=>v==='Más caro'?'vs-b':v==='Similar'?'vs-s':'vs-h';
+  const strs = n=>'★'.repeat(Math.round(n))+'☆'.repeat(5-Math.round(n));
+  const compRows = (r.competitors||[]).map(c=>`
+    <tr>
+      <td><div class="cn">${c.name}<small>${c.platform}</small></div></td>
+      <td style="font-weight:700">$${(c.price_mxn||0).toLocaleString()} MXN</td>
+      <td><span class="stars">${strs(c.rating)}</span></td>
+      <td>${c.monthly_sales}/mes</td>
+      <td><span class="vs-chip ${vsC(c.vs_price)}">${c.vs_price}</span></td>
+      <td style="color:var(--muted)">${c.insight}</td>
+    </tr>`).join('');
+
+  const yourRow = `<tr class="tu-row">
+    <td><div class="cn">${m.name}<span class="tu-badge">⚡ TÚ</span><small>${r.best_platform}</small></div></td>
+    <td style="font-weight:700;color:var(--gold)">$${parseInt(m.sell).toLocaleString()} ${m.sym}</td>
+    <td><span style="color:var(--muted);font-size:11px">Nuevo</span></td>
+    <td><span style="color:var(--muted);font-size:11px">Por arrancar</span></td>
+    <td>—</td>
+    <td style="color:var(--green)">Listo para listar</td>
+  </tr>`;
+
+  const steps = (r.action_steps||[]).map((s,i)=>`<div class="step-item"><div class="step-n">${i+1}</div><div class="step-t">${s}</div></div>`).join('');
+  const risks = (r.risks||[]).map(ri=>`<div class="risk-item">⚠️ ${ri}</div>`).join('');
+  const bestCalc = m.pCalc.find(p=>p.p===r.best_platform)||m.pCalc[0]||{};
+  const totalGain = (parseFloat(bestCalc.netMXN||0)*m.units).toFixed(0);
+
+  const html = `
+    <div class="score-banner">
+      <div class="score-donut">
+        <svg viewBox="0 0 96 96" width="96" height="96">
+          <circle class="sd-bg" cx="48" cy="48" r="42"/>
+          <circle class="sd-fg" cx="48" cy="48" r="42" stroke="${sCol}" style="stroke-dashoffset:${scoreOff}"/>
+        </svg>
+        <div class="sd-label"><div class="sd-num">${r.overall_score}</div><div class="sd-sub">/100</div></div>
+      </div>
+      <div class="banner-body-wrap">
+        <div class="banner-pill ${pClass}">${pEmoji} Rentabilidad ${r.profitability_level}</div>
+        <div class="banner-title">${r.verdict_title}</div>
+        <div class="banner-desc">${r.verdict_body}</div>
+      </div>
+    </div>
+
+    <div class="sec-head" style="animation:fadeUp 0.4s ease both;margin-top:6px">
+      <div class="sec-num" style="background:var(--red)">↓</div>
+      <div><div class="sec-title">Por plataforma — en pesos mexicanos</div></div>
+    </div>
+    <div class="plat-grid-res">${platCards}</div>
+
+    <div class="invest-box">
+      <div class="invest-title">💰 Tu inversión inicial — ${m.units} unidades</div>
+      <div class="invest-grid">
+        <div class="inv-item"><div class="inv-lbl">Inversión total</div><div class="inv-val" style="color:var(--red)">$${parseInt(m.invest).toLocaleString()} ${m.sym}</div></div>
+        <div class="inv-item"><div class="inv-lbl">Ganancia potencial</div><div class="inv-val" style="color:var(--green)">$${parseInt(totalGain).toLocaleString()} ${m.sym}</div></div>
+        <div class="inv-item"><div class="inv-lbl">Punto de equilibrio</div><div class="inv-val">${r.break_even_units} uds</div></div>
+        <div class="inv-item"><div class="inv-lbl">Mejor plataforma</div><div class="inv-val" style="font-size:12px;color:var(--gold)">${r.best_platform}</div></div>
+      </div>
+    </div>
+
+    <div class="sec-head" style="animation:fadeUp 0.5s ease 0.1s both">
+      <div class="sec-num" style="background:var(--surface3);color:var(--text)">vs</div>
+      <div><div class="sec-title">Tu producto vs. la competencia en México</div></div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-head">
+        <div class="comp-head-title">🔍 Mercado Libre MX y Amazon MX</div>
+        <div class="comp-head-sub">Productos similares actualmente en venta</div>
+      </div>
+      <table>
+        <thead><tr><th>Producto</th><th>Precio</th><th>Rating</th><th>Ventas est.</th><th>vs. Tu precio</th><th>Aprendizaje</th></tr></thead>
+        <tbody>${compRows}${yourRow}</tbody>
+      </table>
+    </div>
+
+    <div class="analysis-card">
+      <h4>📊 Análisis del mercado mexicano</h4>
+      <div class="analysis-text">${(r.analysis||'').split('\n').filter(Boolean).map(p=>`<p>${p}</p>`).join('')}</div>
+    </div>
+
+    <div class="two-col">
+      <div class="panel"><h4>🚀 Plan de acción — 5 pasos</h4><div class="step-list">${steps}</div></div>
+      <div class="panel"><h4>⚠️ Riesgos a considerar</h4><div class="risk-list">${risks}</div></div>
+    </div>
+
+    <div class="mx-tip">
+      <div class="mx-flag">🇲🇽</div>
+      <div>
+        <div class="mx-tip-title">Tip exclusivo para el mercado mexicano</div>
+        <div class="mx-tip-body">${r.mx_tip||''}</div>
+      </div>
+    </div>
+
+    <div class="reset-area">
+      <button class="reset-btn" onclick="resetAll()">← Analizar otro producto</button>
+    </div>`;
+
+  const wrap = document.getElementById('resWrap');
+  wrap.innerHTML = html;
+  wrap.classList.add('show');
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(()=>{
+    document.querySelectorAll('.pcb-fill').forEach(b=>{const w=b.style.width;b.style.width='0%';setTimeout(()=>{b.style.width=w;},100);});
+  },300);
+}
+
+function resetAll() {
+  document.getElementById('resWrap').classList.remove('show');
+  document.getElementById('resWrap').innerHTML='';
+  document.getElementById('formSection').style.display='block';
+  document.getElementById('heroSection').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
