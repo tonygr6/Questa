@@ -1030,7 +1030,7 @@ async function fetchML(){
   }
 }
 
-// ── CALL AI ──
+// ── CALL AI — Gemini ──
 const GEMINI_KEY = 'AQ.Ab8RN6K1dqcMUqgBFNm6TuCJn8n5JcLWcTmgcX1WEIhHy1M1wA';
 async function callAI(prompt){
   const response = await fetch(
@@ -1046,13 +1046,8 @@ async function callAI(prompt){
   );
   if(!response.ok) throw new Error(`HTTP ${response.status}`);
   const data = await response.json();
+  if(data.error) throw new Error(data.error.message || 'Gemini error');
   return data.candidates[0].content.parts[0].text.replace(/```json|```/g,'').trim();
-}
-  });
-  if(!response.ok) throw new Error(`HTTP ${response.status}`);
-  const data=await response.json();
-  if(data.error) throw new Error(data.error.message||'API error');
-  return data.content.map(b=>b.text||'').join('').replace(/```json|```/g,'').trim();
 }
 
 // ── MAIN ANALYSIS ──
