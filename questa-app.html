@@ -1030,15 +1030,11 @@ async function fetchML(){
   }
 }
 
-// ── CALL AI — OpenAI ──
-const OPENAI_KEY = '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';
+// ── CALL AI — OpenAI via proxy ──
 async function callAI(prompt){
-  const response = await fetch('https://api.openai.com/v1/chat/completions', {
+  const response = await fetch('/api/analyze', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${OPENAI_KEY}`
-    },
+    headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
       model: 'gpt-4o-mini',
       max_tokens: 2048,
@@ -1046,7 +1042,7 @@ async function callAI(prompt){
     })
   });
   if(!response.ok) {
-    const err = await response.json();
+    const err = await response.json().catch(()=>({}));
     throw new Error(err.error?.message || `HTTP ${response.status}`);
   }
   const data = await response.json();
